@@ -1,0 +1,29 @@
+version: '2'
+services:
+  postgres:
+      image: postgres:9.6
+
+      environment:
+          - POSTGRES_USER=airflow
+          - POSTGRES_PASSWORD=airflow
+          - POSTGRES_DB=airflow
+      ports:
+          - 5432:5432
+  webserver:
+      image: puckel/docker-airflow:1.8.1
+      restart: always
+      command: 
+          - pip install praw
+      depends_on:
+          - postgres
+      environment:
+          - LOAD_EX=n
+          - EXECUTOR=Local
+      volumes:
+          - ./dags/Subs
+          - ./dags:/usr/local/airflow/dags
+          - ./requirements.txt:/requirements.txt
+      ports:
+          - 8080:8080
+      command: webserver
+
