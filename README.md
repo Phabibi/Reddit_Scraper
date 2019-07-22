@@ -1,2 +1,2 @@
 # Reddit_Scraper
-Simple reddit scrapper that uses airflow for schedules. 
+This is a simple Reddit scraper that uses the pythons praw module inorder to access reddit and scrape subbreddits. 
